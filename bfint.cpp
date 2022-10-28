@@ -21,11 +21,11 @@ void write(int mp,int v){
     }
 }
 
-std::map<int,int> bfmain(std::vector<char> string){
+std::map<int,int> bfmain(std::vector<char> string,int i){
     if(string.size() == 0){
         return memory;
     }
-    switch (string[0])
+    switch (string[i])
     {
     case '+':
         
@@ -34,7 +34,6 @@ std::map<int,int> bfmain(std::vector<char> string){
     default:
         break;
     }
-    //switch()
 }
 
 int main(){
