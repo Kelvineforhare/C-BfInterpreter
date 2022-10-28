@@ -21,18 +21,34 @@ void write(int mp,int v){
     }
 }
 
-std::map<int,int> bfmain(std::vector<char> string,int i){
-    if(string.size() == 0){
+std::map<int,int> bfmain(std::vector<char> string,int i,int mp){
+    if(mp == string.size() ){
         return memory;
     }
     switch (string[i])
     {
+    case '>':
+        ++mp;
+        break;
+    case '<':
+        --mp;
+        break;
+    case '.':
+        std::cout << read(mp);
+        break;
+    case ',':
+        int x;
+        std::cin >> x;
+        write(mp,x);
+        break;
     case '+':
-        
+        write(mp,read(mp)+1);
         break;
-    
-    default:
+    case '-':
+        write(mp,read(mp)-1);
         break;
+
+    bfmain(string,++i,mp);
     }
 }
 
