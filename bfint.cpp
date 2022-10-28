@@ -47,6 +47,14 @@ std::map<int,int> bfmain(std::vector<char> string,int i,int mp){
     case '-':
         write(mp,read(mp)-1);
         break;
+    case '[':
+        if(read(mp) == 0){
+            //goes out of loop
+        }
+        break;
+    case ']':
+        //goes back to open bracket 
+        break;
 
     bfmain(string,++i,mp);
     }
