@@ -3,6 +3,7 @@
 #include <map>
 
 std::map<int,int> memory;
+//change to vector array
 
 
 
@@ -25,7 +26,8 @@ int findClosingBracket(std::vector<char> string,int i){
     std::vector<char> stack;
     stack.push_back(string[i]);
     ++i;
-    while(stack.size() > 0){
+    while(stack.size() > 0 && i != string.size()){
+        //std::cout << i << "\n";
         switch (string[i])
         {
             case '[':
@@ -44,7 +46,7 @@ int findOpeningBracket(std::vector<char> string,int i){
     std::vector<char> stack;
     stack.push_back(string[i]);
     --i;
-    while(stack.size() > 0){
+    while(stack.size() > 0 && i >= 0){
         switch (string[i])
         {
             case '[':
@@ -63,6 +65,12 @@ std::map<int,int> bfmain(std::vector<char> string,int i,int mp){
     if(i == string.size() ){
         return memory;
     }
+     for(auto it = memory.begin();
+        it != memory.end(); ++it)
+    {
+    std::cout << it->first << " " << it->second << " " << "\n";
+    }
+    //std::cout << "mp: " << mp << " " << "i: " << i << std::endl;
     switch (string[i])
     {
     case '>':
@@ -72,7 +80,8 @@ std::map<int,int> bfmain(std::vector<char> string,int i,int mp){
         --mp;
         break;
     case '.':
-        std::cout << read(mp);
+        //printf("%c", read(mp));
+        //std::cout <<  ;
         break;
     case ',':
         int x;
@@ -86,38 +95,44 @@ std::map<int,int> bfmain(std::vector<char> string,int i,int mp){
         write(mp,read(mp)-1);
         break;
     case '[':
+        //std::cout << read(mp) << "\n";
         if(read(mp) == 0){
             i = findClosingBracket(string,i)-1;
         }
         break;
     case ']':
-        i = findOpeningBracket(string,i)+1;
+        i = findOpeningBracket(string,i);
+        //std::cout << i << std::endl;
         break;
-
-    bfmain(string,++i,mp);
     }
+    bfmain(string,++i,mp);
     return memory;
 }
 
-std::vector<char> stringToVec(const char arr[]){
-    std::vector<char> vec;
-    int i = 0;
-    while(arr[i]){
-        vec.push_back(arr[i]);
-        ++i;
-    }
+
+
+std::vector<char> stringToVec(std::string str){
+    std::vector<char> vec(str.begin(), str.end());
     return vec;
 }
 
+void run(std::string str){
+    bfmain(stringToVec(str),0,0);
+}
+
 int main(){
-    // write(0,5);
-    // write(1,8);
-    // std::vector<char> bracket{'[','[',']',']'};
-    auto vec = stringToVec("--[..[[-]+>[.]]--,>,++");
-    for(int i = 0; i < vec.size();++i){
-        std::cout << vec[i] << " ";
-    }
-    std::cout << "\n";
-    std::cout << "Ans: " << findClosingBracket(stringToVec("--[..[[-]+>[.]]--,>,++"),2)  << "\n";
+    
+
+    //std::cout << "Ans: " << findOpeningBracket(vec, 7)  << "\n";
+    //auto insert = memory.insert({0,42});
+    //run("""++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.""");
+    //run("+++++[->++++++++++<]>--<+++[->>++++++++++<<]>>++<<----------[+>.>.<+<]");
+    run("++++[>+++++<-]>[<+++++>-]+<+[>[>+>+<<-]++>>[<<+>>-]>>>[-]++>[-]+>>>+[[-]++++++>>>]<<<[[<++++++++<++>>-]+<.<[>----<-]<]<<[>>>>>[>>>[-]+++++++++<[>-<-]+++++++++>[-[<->-]+[<<<]]<[>+<-]>]<<-]<<-]");
+
+    // for(auto it = memory.begin();
+    //     it != memory.end(); ++it)
+    // {
+    // std::cout << it->first << " " << it->second << " " << "\n";
+    // }
     return 0;
 }
