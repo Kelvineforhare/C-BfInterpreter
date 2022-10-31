@@ -60,7 +60,7 @@ int findOpeningBracket(std::vector<char> string,int i){
 }
 
 std::map<int,int> bfmain(std::vector<char> string,int i,int mp){
-    if(mp == string.size() ){
+    if(i == string.size() ){
         return memory;
     }
     switch (string[i])
@@ -96,13 +96,28 @@ std::map<int,int> bfmain(std::vector<char> string,int i,int mp){
 
     bfmain(string,++i,mp);
     }
+    return memory;
+}
+
+std::vector<char> stringToVec(const char arr[]){
+    std::vector<char> vec;
+    int i = 0;
+    while(arr[i]){
+        vec.push_back(arr[i]);
+        ++i;
+    }
+    return vec;
 }
 
 int main(){
     // write(0,5);
     // write(1,8);
-    std::vector<char> bracket{'[','[',']',']'};
-    //findClosingBracket("--[..+>--],>,++",2) ; 
-    std::cout << "Ans: " << findOpeningBracket(bracket,3) << "\n";
+    // std::vector<char> bracket{'[','[',']',']'};
+    auto vec = stringToVec("--[..[[-]+>[.]]--,>,++");
+    for(int i = 0; i < vec.size();++i){
+        std::cout << vec[i] << " ";
+    }
+    std::cout << "\n";
+    std::cout << "Ans: " << findClosingBracket(stringToVec("--[..[[-]+>[.]]--,>,++"),2)  << "\n";
     return 0;
 }
