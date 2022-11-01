@@ -65,11 +65,11 @@ std::map<int,int> bfmain(std::vector<char> string,int i,int mp){
     if(i == string.size() ){
         return memory;
     }
-     for(auto it = memory.begin();
-        it != memory.end(); ++it)
-    {
-    std::cout << it->first << " " << it->second << " " << "\n";
-    }
+    //  for(auto it = memory.begin();
+    //     it != memory.end(); ++it)
+    // {
+    // std::cout << it->first << " " << it->second << " " << "\n";
+    // }
     //std::cout << "mp: " << mp << " " << "i: " << i << std::endl;
     switch (string[i])
     {
@@ -80,7 +80,7 @@ std::map<int,int> bfmain(std::vector<char> string,int i,int mp){
         --mp;
         break;
     case '.':
-        //printf("%c", read(mp));
+        printf("%c", read(mp));
         //std::cout <<  ;
         break;
     case ',':
